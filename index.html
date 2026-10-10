@@ -23,9 +23,9 @@
 <div class="bottom"><button class="control" id="mute" aria-label="Couper le son" aria-pressed="false" title="Son">♪</button><input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"><a class="download" href="chanson-Luc.mp3" download>Télécharger le MP3 ↓</a></div>
 <p class="status" id="status" role="status" aria-live="polite">Un petit moment pour Luc.</p></div>
 <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<div class="cover"><img src="pochette-Luc.png" alt="Pochette"><p><strong>Comment tu fais, Luc ?</strong><br>Une chanson de TITUS · Pour le plaisir d’être ensemble</p></div></div></section>
+<div class="cover"><img src="pochette-luc.png" alt="Pochette"><p><strong>Comment tu fais, Luc ?</strong><br>Une chanson de TITUS · Pour le plaisir d’être ensemble</p></div></div></section>
 <footer>TA CAVE, TA TABLÉE… ÇA, TU PEUX GARDER !</footer></main>
-<audio id="audio" src="chanson-Luc.mp3" preload="metadata"></audio>
+<audio id="audio" src="chanson-luc.mp3" preload="metadata"></audio>
 <script>
 'use strict';
 const $=id=>document.getElementById(id),audio=$('audio'),play=$('play'),seek=$('seek'),status=$('status');
@@ -42,6 +42,6 @@ $('back').addEventListener('click',()=>jump(-10));$('forward').addEventListener(
 function volumeState(){const silent=audio.muted||audio.volume===0;$('mute').textContent=silent?'×':'♪';$('mute').setAttribute('aria-label',silent?'Rétablir le son':'Couper le son');$('mute').setAttribute('aria-pressed',String(silent));$('volume').value=audio.muted?0:audio.volume;}
 $('mute').addEventListener('click',()=>{if(audio.volume===0){audio.volume=1;audio.muted=false;}else audio.muted=!audio.muted;});$('volume').addEventListener('input',()=>{audio.volume=Number($('volume').value);audio.muted=false;});audio.addEventListener('volumechange',volumeState);
 document.addEventListener('keydown',e=>{if(e.target.closest('button,input,a')||e.ctrlKey||e.metaKey||e.altKey)return;if(e.code==='Space'){e.preventDefault();audio.paused?start():audio.pause();}if(e.code==='ArrowLeft'){e.preventDefault();jump(-10);}if(e.code==='ArrowRight'){e.preventDefault();jump(10);}});
-if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:'Comment tu fais, Luc ?',artist:'TITUS',artwork:[{src:'pochette-Luc.png',type:'image/png'}]});for(const [name,fn] of Object.entries({play:()=>start(),pause:()=>audio.pause(),seekbackward:()=>jump(-10),seekforward:()=>jump(10)})){try{navigator.mediaSession.setActionHandler(name,fn);}catch(e){}}}
+if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:'Comment tu fais, Luc ?',artist:'TITUS',artwork:[{src:'pochette-luc.png',type:'image/png'}]});for(const [name,fn] of Object.entries({play:()=>start(),pause:()=>audio.pause(),seekbackward:()=>jump(-10),seekforward:()=>jump(10)})){try{navigator.mediaSession.setActionHandler(name,fn);}catch(e){}}}
 window.addEventListener('load',()=>{audio.play().then(closeWelcome).catch(()=>{if(!audio.error)status.textContent='Appuyez sur Lecture pour lancer la chanson.';});});
 </script></body></html>
